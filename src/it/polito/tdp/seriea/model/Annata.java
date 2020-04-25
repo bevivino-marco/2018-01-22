@@ -42,7 +42,7 @@ public boolean equals(Object obj) {
 }
 @Override
 public String toString() {
-	return String.format("anno=%s , punteggio=%s;\n", annata, punteggio);
+	return String.format("\nanno=%s , punteggio=%s", annata, punteggio);
 }
 @Override
 public int compareTo(Annata a) {

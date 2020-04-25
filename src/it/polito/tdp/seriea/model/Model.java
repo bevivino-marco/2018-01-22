@@ -68,7 +68,60 @@ public String annataDoro() {
 	return "ha partecipato solo ad una stagione";
 }
 
+public List <Annata> camminoV (Team team){
+	List <Annata> parziale = new LinkedList <Annata>();
+	parziale.add(listaA.get(0));
+	List <Annata> finale = new LinkedList<Annata>();
+	int Max = 0;
+	cerca (parziale, finale, Max);
+	return finale;
+	
+	
+}
+private void cerca(List<Annata> parziale, List<Annata> finale, int Max) {
+    List <Annata> successori = new LinkedList <Annata> (Graphs.successorListOf(grafo, parziale.get(parziale.size()-1)));
+    if (successori.size()==0) {
+    	if (parziale.size()> Max) {
+    		Max= parziale.size();
+    		finale.clear();
+    		finale.addAll(parziale);
+    		return;
+    	}
+    	return;
+    }
+    Annata presente = parziale.get(parziale.size()-1);
+    if ((listaA.size()-1)> listaA.indexOf(presente)) {
+    Annata prossimo = listaA.get(listaA.indexOf(presente)+1);
+    if (eOk(presente,prossimo)) {
+    	parziale.add(prossimo);
+    	System.out.println(parziale.toString());
+    	cerca (parziale, finale, Max);
+    	//parziale.remove(parziale.size()-1);
+    }else {
+    	parziale.clear();
+    	parziale.add(prossimo);
+    	cerca (parziale, finale, Max);
+    	//parziale.remove(prossimo);
 
+
+    }
+    	
+    
+    
+    }
+/*	for(Annata a :listaA){
+		if (eOk(a,parziale)) {
+		parziale.add(a);
+		cerca (parziale, finale, Max);
+		parziale.remove(parziale.size()-1);}
+	}*/
+}
+private boolean eOk(Annata a, Annata prossimo) {
+	
+	if (a.getPunteggio()<prossimo.getPunteggio())
+		return true;
+	return false;
+}
 
 
 

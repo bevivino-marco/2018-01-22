@@ -52,15 +52,19 @@ public class SerieAController {
     void doTrovaAnnataOro(ActionEvent event) {
        try {
     	   model.creaGrafo(boxSquadra.getValue());
-    	   txtResult.appendText(model.annataDoro());
+    	   txtResult.appendText("\n"+model.annataDoro());
        }catch (Exception e ) {
-    	   txtResult.appendText("selezionare una squadra dal menu e cliccare seleziona squadra!!!");
+    	   txtResult.appendText("selezionare una squadra dal menu e cliccare seleziona squadra!!!\n");
        }
     }
 
     @FXML
     void doTrovaCamminoVirtuoso(ActionEvent event) {
-
+    	try {
+     	   txtResult.appendText("\n"+model.camminoV(boxSquadra.getValue()).toString());
+        }catch (Exception e ) {
+     	   txtResult.appendText("selezionare una squadra dal menu e cliccare seleziona squadra!!!\n");
+        }
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
