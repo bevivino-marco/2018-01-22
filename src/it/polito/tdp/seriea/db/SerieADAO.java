@@ -75,22 +75,28 @@ public class SerieADAO {
 			ResultSet res = st.executeQuery();
 
 			while (res.next()) {
+				boolean inserito =false;
 				if (!result.containsKey(res.getInt("Season"))) {
 					result.put(res.getInt("Season"), new Annata (res.getInt("Season")));
-				}else {
+				}
 					if (res.getString("HomeTeam").compareTo(team.getTeam())==0) {
-						if (res.getInt("FTHG")> res.getInt("FTAG"))
+						if (res.getInt("FTHG")> res.getInt("FTAG")) {
 							result.get(res.getInt("Season")).setPunteggio(3);
-						else if (res.getInt("FTHG")== res.getInt("FTAG"))
+							inserito = true;}
+						else if (res.getInt("FTHG")== res.getInt("FTAG")) {
 							result.get(res.getInt("Season")).setPunteggio(1);
+							inserito = true;}
 					}else if (res.getString("AwayTeam").compareTo(team.getTeam())==0) {
-						if (res.getInt("FTAG")> res.getInt("FTHG"))
+						if (res.getInt("FTAG")> res.getInt("FTHG")) {
 							result.get(res.getInt("Season")).setPunteggio(3);
+							inserito = true;}
 						else if (res.getInt("FTHG")== res.getInt("FTAG"))
 							result.get(res.getInt("Season")).setPunteggio(1);
 					}
 				}
-			}
+				//System.out.println(res.getInt("Season")+" / "+res.getString("HomeTeam")+" / "+res.getString("AwayTeam")+" / "+
+//				result.get(res.getInt("Season")).getPunteggio()+" \n");
+			
 
 			conn.close();
 			return result;

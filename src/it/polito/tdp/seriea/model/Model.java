@@ -70,6 +70,7 @@ public String annataDoro() {
 
 public List <Annata> camminoV (Team team){
 	List <Annata> parziale = new LinkedList <Annata>();
+	List <Annata> lista = new LinkedList<Annata>(listaA);
 	parziale.add(listaA.get(0));
 	List <Annata> finale = new LinkedList<Annata>();
 	int Max = 0;
@@ -79,22 +80,21 @@ public List <Annata> camminoV (Team team){
 	
 }
 private void cerca(List<Annata> parziale, List<Annata> finale, int Max) {
-    List <Annata> successori = new LinkedList <Annata> (Graphs.successorListOf(grafo, parziale.get(parziale.size()-1)));
-    if (successori.size()==0) {
+ //   List <Annata> successori = new LinkedList <Annata> (Graphs.successorListOf(grafo, parziale.get(parziale.size()-1)));
+ //   if (successori.size()==0) {
     	if (parziale.size()> Max) {
     		Max= parziale.size();
     		finale.clear();
     		finale.addAll(parziale);
-    		return;
+    		System.out.println(finale.toString());
     	}
-    	return;
-    }
+  //  }
     Annata presente = parziale.get(parziale.size()-1);
     if ((listaA.size()-1)> listaA.indexOf(presente)) {
     Annata prossimo = listaA.get(listaA.indexOf(presente)+1);
     if (eOk(presente,prossimo)) {
     	parziale.add(prossimo);
-    	System.out.println(parziale.toString());
+    
     	cerca (parziale, finale, Max);
     	//parziale.remove(parziale.size()-1);
     }else {
